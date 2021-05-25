@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <div class="container mb-3">
+        <h2>List page</h2>
+        <P>지난 내역을 확인하세요.</p>
+    
+
+            <div class="container">
+                <br><br>
+                <p>지난내역 목록입니다.</p>
+                
+                <table class="table table-striped">
+                <thead>
+                <tr>
+                <th>넘버</th>
+                <th>날짜</th>
+                <th>수정</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <% data.forEach(function (item,index){ %>
+                <tr>
+                <td>
+                <%= item.id %>
+                </td>
+                <td>
+                <a href='/detail/<%= item.date %>'><%= item.date %></a>
+                </td>
+                <td>
+                <%= item.updatetime %>
+                </td>
+                </tr>
+                <% })%>
+                </tbody>
+                </table>
+            </div>
+            <br><br>
+
+            <div class="container"> <!-- 페이징 -->
+                <ul class="pager">
+                    <%
+                    var curSet = pasing.curSet
+                    var endPage = pasing.endPage
+                    var startPage = pasing.startPage
+                    var totalSet = pasing.totalSet
+                    var totalPage = pasing.totalPage
+                    var page_list_size = pasing.page_list_size
+                    var page_size = pasing.page_size
+                    var curPage = pasing.curPage
+                    %>
+                    <%
+                    if(curSet > 1){
+                        %>
+
+                        <li value=(startPage -1) class="previous">
+                            <a href='/pasing/<%= ( startPage - 1) %>'>이전페이지</a>
+                        </li>
+
+                        <%
+                    }
+                    %>
+                    <%
+                    for(var i = startPage; i <= endPage; i++){
+                        if(i > totalPage){break;}
+
+                        if(i == curPage){
+                            %>
+                            <li value=<%= i %> class='' >
+                                <a href='/pasing/<%= i %>'>
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <%
+                        }else{
+                            %>
+
+                            <li value=<%= i %> class='active' >
+                                <a href='/pasing/<%= i %>'>
+                                    <%= i %>
+                                </a>
+                            </li>
+
+
+                            <%
+                        }
+                        %>
+                        <%
+                    }
+                    %>
+                    <%
+                    if(curSet < totalSet){
+                        %>
+                        <li value=( endPage + 1) class="next">
+                            <a href='/pasing/<%= ( endPage + 1) %>'>다음페이지</a>
+                        </li>
+                        <%
+                    }
+                    %>
+                </ul>
+            </div>
+            <br>
+            <br>     
+  </body>
+</html>

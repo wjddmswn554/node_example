@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+    <style>
+      .chat_log{ width: 95%; height: 200px; }
+      .name{ width: 10%; }
+      .message{ width: 70%; }
+      .chat{ width: 10%; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <textarea id="chatLog" class="chat_log" readonly></textarea>
+    </div>
+    <form id="chat">
+      <input id="name" class="name" type="text" readonly>
+      <input id="message" class="message" type="text">
+      <input type="submit" class="chat" value="chat"/>
+    </form>
+    <div id="box" class="box">
+
+    <script src="/socket.io/socket.io.js"></script> <!-- socket.io include -->
+    <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('#chat').on('submit', function(e){ // jquery submit의 이벤트리스너, submit클릭시
+        socket.emit('send message', $('#name').val(), $('#message').val()); //사용자이름과 메시지를 전달('send message'이벤트 emit)
+        $('#message').val('');
+        $('#message').focus();
+        e.preventDefault(); //이벤트 정지
+      });
+
+      //server.js에서 send message가 receive message 이벤트 발생시킴
+      socket.on('receive message', function(msg){ //receive message이벤트 emit, 메시지내용을 #chatLog에 추가
+        $('#chatLog').append(msg+'\n');
+        $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
+      });
+      socket.on('change name', function(name){ //서버에서 change name이벤트가 emit되면 #name 이름 변경
+        $('#name').val(name);
+      });
+    </script>
+  </body>
+</html>

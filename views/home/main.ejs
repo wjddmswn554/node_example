@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <div class="jumbotron"> <!-- jumbotron - 부트스트랩 -->
+        <h1>000</h1>
+        <P>000 SMT 생산수량 확인 페이지입니다.</p>
+          <style type="text/css">
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+              font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+            .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+            @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>
+            <div class="tg-wrap">
+            <% if(sw===1) { %>
+              <p>오늘 입력된 값은 아직 없습니다.</p>
+            <% } else { %>
+            <table class="tg" style="table-layout: fixed; width: 647px">
+            <colgroup>
+              <% for(var i =0; i<6; i++) { %>
+            <col style="width: 145px">
+              <% } %>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="tg-0pky" colspan="2"><%= topic[0].line %></th> 
+                <th class="tg-0pky" colspan="2"><%= topic[1].line %></th>
+                <th class="tg-0pky" colspan="2"><%= topic[2].line %></th>
+              </tr>
+            </thead>
+            <tbodby>
+              <tr>
+                <td class="tg-0pky" colspan="2"><input id="modelname[0]" name="modelname[0]" type="text" size=30 placeholder='modelnameA' value=<%= topic[0].modelname %>></td>
+                <td class="tg-0pky" colspan="2"><input id="modelname[1]" name="modelname[1]" type="text" size=30 placeholder='modelnameB' value=<%= topic[1].modelname %>></td>
+                <td class="tg-0pky" colspan="2"><input id="modelname[2]" name="modelname[2]" type="text" size=30 placeholder='modelnameC' value=<%= topic[2].modelname %>></td>
+              </tr>
+              <tr>
+                <td class="tg-0pky">생산 수량 / 목표 수량</td>
+                <td class="tg-0pky">달성률</td>
+                <td class="tg-0pky">생산수량/목표수량</td>
+                <td class="tg-0pky">달성률</td>
+                <td class="tg-0pky">생산수량/목표수량</td>
+                <td class="tg-0pky">달성률</td>
+              </tr>
+              <tr>
+                <td class="tg-0pky"><input id="fountain[0]" name="fountain[0]" type="text" size=10 placeholder='modelnameC' value='<%= topic[0].resulttotal %>/<%= topic[0].targettotal %>'></td>
+                <td class="tg-0pky"><input id="achivementrate[0]" name="achivementrate[0]" type="text" size=10 placeholder='modelnameC' value='<%= topic[0].achivementrate %>%'></td>
+                <td class="tg-0pky"><input id="fountain[1]" name="fountain[1]" type="text" size=10 placeholder='modelnameC' value='<%= topic[1].resulttotal %>/<%= topic[1].targettotal %>'></td>
+                <td class="tg-0pky"><input id="achivementrate[1]" name="achivementrate[1]" type="text" size=10 placeholder='modelnameC' value='<%= topic[1].achivementrate %>%'></td>
+                <td class="tg-0pky"><input id="fountain[2]" name="fountain[2]" type="text" size=10 placeholder='modelnameC' value='<%= topic[2].resulttotal %>/<%= topic[2].targettotal %>'></td>
+                <td class="tg-0pky"><input id="achivementrate[2]" name="achivementrate[2]" type="text" size=10 placeholder='modelnameC' value='<%= topic[2].achivementrate %>%'></td>
+              </tr>
+            </tbody>
+            </table>
+            <% } %>
+          </div>
+      </div>
+      <style>
+        table{
+            border-collapse: collapse; 
+        }
+        td{
+            border:1px solid black; 
+        }
+        table.txc-table {
+          width: 100%;
+          table-layout: fixed;
+        }
+        table thead tr{
+          width: 100%;
+        }
+      </style>
+    </div>
+    <script src="/socket.io/socket.io.js"></script> <!-- socket.io include -->
+    <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+      //server.js에서 send message가 receive message 이벤트 발생시킴
+      socket.on('receive message', function(topic){ //receive message이벤트 emit, 메시지내용을 #chatLog에 추가
+        document.getElementById('modelname[0]').value = topic.A[6];
+        document.getElementById('modelname[1]').value = topic.B[6];
+        document.getElementById('modelname[2]').value = topic.C[6];
+        document.getElementById('fountain[0]').value = topic.A[3][1]+'/'+topic.A[3][0];
+        document.getElementById('fountain[1]').value = topic.B[3][1]+'/'+topic.B[3][0];
+        document.getElementById('fountain[2]').value = topic.C[3][1]+'/'+topic.C[3][0];
+        document.getElementById('achivementrate[0]').value = topic.A[4]+'%';
+        document.getElementById('achivementrate[1]').value = topic.B[4]+'%';
+        document.getElementById('achivementrate[2]').value = topic.C[4]+'%';
+      }); 
+    </script>
+  </body>
+</html>

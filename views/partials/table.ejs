@@ -1,0 +1,173 @@
+<table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value='A' readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <th class="tg-8u09">A TIME</th>
+        <th class="tg-8u09">B TIME</th>
+        <th class="tg-8u09">C TIME</th>
+        <th class="tg-8u09">D TIME</th>
+        <th class="tg-8u09">E TIME</th>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[0][0][0]" name="table[0][0][0]" type="text" size=8 placeholder='amodel'></td>
+        <td class="tg-mwl0"><input id="table[0][0][1]" name="table[0][0][1]" type="text" size=8 placeholder='bmodel'></td>
+        <td class="tg-mwl0"><input id="table[0][0][2]" name="table[0][0][2]" type="text" size=8 placeholder='cmodel'></td>
+        <td class="tg-mwl0"><input id="table[0][0][3]" name="table[0][0][3]" type="text" size=8 placeholder='dmodel'></td>
+        <td class="tg-mwl0"><input id="table[0][0][4]" name="table[0][0][4]" type="text" size=8 placeholder='emodel'></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[0][1][0]" name="table[0][1][0]" type="text" size=8 placeholder='atarget' value=0 onkeyup='call()' onfocus="this.select()"></td> 
+        <td class="tg-mwl0"><input id="table[0][1][1]" name="table[0][1][1]" type="text" size=8 placeholder='btarget' value=0 onkeyup='call()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][1][2]" name="table[0][1][2]" type="text" size=8 placeholder='ctarget' value=0 onkeyup='call()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][1][3]" name="table[0][1][3]" type="text" size=8 placeholder='btarget' value=0 onkeyup='call()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][1][4]" name="table[0][1][4]" type="text" size=8 placeholder='ctarget' value=0 onkeyup='call()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][3][0]" name="table[0][3][0]" type="text" size=8 placeholder='targettotal' readonly></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[0][4]" name="table[0][4]" type="textarea" size=8 placeholder='achivementrate' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[0][2][0]" name="table[0][2][0]" type="text" size=8 placeholder='aproduction' value=0 onkeyup='call2()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][2][1]" name="table[0][2][1]" type="text" size=8 placeholder='bproduction' value=0 onkeyup='call2()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][2][2]" name="table[0][2][2]" type="text" size=8 placeholder='cproduction' value=0 onkeyup='call2()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][2][3]" name="table[0][2][3]" type="text" size=8 placeholder='dproduction' value=0 onkeyup='call2()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][2][4]" name="table[0][2][4]" type="text" size=8 placeholder='eproduction' value=0 onkeyup='call2()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[0][3][1]" name="table[0][3][1]" type="text" size=8 placeholder='resulttotal' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[0][5]" name="table[0][5]" type="textarea" size=100 placeholder='remarks'></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+  <table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value='B' readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <th class="tg-8u09">A TIME</th>
+        <th class="tg-8u09">B TIME</th>
+        <th class="tg-8u09">C TIME</th>
+        <th class="tg-8u09">D TIME</th>
+        <th class="tg-8u09">E TIME</th>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[1][0][0]" name="table[1][0][0]" type="text" size=8 placeholder='amodel' ></td>
+        <td class="tg-mwl0"><input id="table[1][0][1]" name="table[1][0][1]" type="text" size=8 placeholder='bmodel'></td>
+        <td class="tg-mwl0"><input id="table[1][0][2]" name="table[1][0][2]" type="text" size=8 placeholder='cmodel'></td>
+        <td class="tg-mwl0"><input id="table[1][0][3]" name="table[1][0][3]" type="text" size=8 placeholder='dmodel'></td>
+        <td class="tg-mwl0"><input id="table[1][0][4]" name="table[1][0][4]" type="text" size=8 placeholder='emodel'></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[1][1][0]" name="table[1][1][0]" type="text" size=8 placeholder='atarget' value=0 onkeyup='call4()' onfocus="this.select()"></td> 
+        <td class="tg-mwl0"><input id="table[1][1][1]" name="table[1][1][1]" type="text" size=8 placeholder='btarget' value=0 onkeyup='call4()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][1][2]" name="table[1][1][2]" type="text" size=8 placeholder='ctarget' value=0 onkeyup='call4()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][1][3]" name="table[1][1][3]" type="text" size=8 placeholder='dtarget' value=0 onkeyup='call4()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][1][4]" name="table[1][1][4]" type="text" size=8 placeholder='etarget' value=0 onkeyup='call4()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][3][0]" name="table[1][3][0]" type="text" size=8 placeholder='targettotal' readonly></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[1][4]" name="table[1][4]" type="textarea" size=8 placeholder='achivementrate' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[1][2][0]" name="table[1][2][0]" type="text" size=8 placeholder='aproduction' value=0 onkeyup='call5()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][2][1]" name="table[1][2][1]" type="text" size=8 placeholder='bproduction' value=0 onkeyup='call5()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][2][2]" name="table[1][2][2]" type="text" size=8 placeholder='cproduction' value=0 onkeyup='call5()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][2][3]" name="table[1][2][3]" type="text" size=8 placeholder='dproduction' value=0 onkeyup='call5()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][2][4]" name="table[1][2][4]" type="text" size=8 placeholder='eproduction' value=0 onkeyup='call5()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[1][3][1]" name="table[1][3][1]" type="text" size=8 placeholder='resulttotal' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[1][5]" name="table[1][5]" type="textarea" size=100 placeholder='remarks'></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+  <table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value='C' readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <th class="tg-8u09">A TIME</th>
+        <th class="tg-8u09">B TIME</th>
+        <th class="tg-8u09">C TIME</th>
+        <th class="tg-8u09">D TIME</th>
+        <th class="tg-8u09">E TIME</th>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[2][0][0]" name="table[2][0][0]" type="text" size=8 placeholder='amodel' ></td>
+        <td class="tg-mwl0"><input id="table[2][0][1]" name="table[2][0][1]" type="text" size=8 placeholder='bmodel'></td>
+        <td class="tg-mwl0"><input id="table[2][0][2]" name="table[2][0][2]" type="text" size=8 placeholder='cmodel'></td>
+        <td class="tg-mwl0"><input id="table[2][0][3]" name="table[2][0][3]" type="text" size=8 placeholder='dmodel'></td>
+        <td class="tg-mwl0"><input id="table[2][0][4]" name="table[2][0][4]" type="text" size=8 placeholder='emodel'></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[2][1][0]" name="table[2][1][0]" type="text" size=8 placeholder='atarget' value=0 onkeyup='call7()' onfocus="this.select()"></td> 
+        <td class="tg-mwl0"><input id="table[2][1][1]" name="table[2][1][1]" type="text" size=8 placeholder='btarget' value=0 onkeyup='call7()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][1][2]" name="table[2][1][2]" type="text" size=8 placeholder='ctarget' value=0 onkeyup='call7()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][1][3]" name="table[2][1][3]" type="text" size=8 placeholder='dtarget' value=0 onkeyup='call7()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][1][4]" name="table[2][1][4]" type="text" size=8 placeholder='etarget' value=0 onkeyup='call7()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][3][0]" name="table[2][3][0]" type="text" size=8 placeholder='targettotal' readonly></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[2][4]" name="table[2][4]" type="textarea" size=8 placeholder='achivementrate' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[2][2][0]" name="table[2][2][0]" type="text" size=8 placeholder='aproduction' value=0 onkeyup='call8()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][2][1]" name="table[2][2][1]" type="text" size=8 placeholder='bproduction' value=0 onkeyup='call8()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][2][2]" name="table[2][2][2]" type="text" size=8 placeholder='cproduction' value=0 onkeyup='call8()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][2][3]" name="table[2][2][3]" type="text" size=8 placeholder='dproduction' value=0 onkeyup='call8()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][2][4]" name="table[2][2][4]" type="text" size=8 placeholder='eproduction' value=0 onkeyup='call8()' onfocus="this.select()"></td>
+        <td class="tg-mwl0"><input id="table[2][3][1]" name="table[2][3][1]" type="text" size=8 placeholder='resulttotal' readonly></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[2][5]" name="table[2][5]" type="textarea" size=100 placeholder='remarks'></td>
+      </tr>
+    </thead>
+  </table>

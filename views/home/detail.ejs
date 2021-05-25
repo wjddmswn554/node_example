@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+<title>내역 상세</title>
+</head>
+<body>
+    <%
+    var time = ['A', 'B', 'C', 'D', 'E']
+    var model = ['amodel', 'bmodel', 'cmodel', 'dmodel', 'emodel'];
+    %>
+    <%- include('../partials/nav') %>
+<div class="container">
+<h2>List 상세보기</h2>
+<P><br>값이 0일 경우 반드시 0을 입력해주세요</P>
+<%- include ('../partials/time') %>
+<link rel="stylesheet" href="/css/table.css">
+<form action="/about_process" name="frm" id="frm" method="POST" onsubmit="return confirm('수정하시겠습니까?')">
+  <input id="date" name="date" type="text" readonly value=<%= topic[0].date %>>의 수정 페이지입니다.
+    <p>마지막으로 기록한 날짜 및 시각<br>
+        <% for(i=0;i<3;i++) { %>
+        <%= time[i] %> Line : <%= topic[0].updatetime %> / <% } %>
+<table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <% for(i=0;i<8;i++) { %>
+      <col style="width: 110px">
+      <% } %>
+    </colgroup>
+    <thead>
+      <tr>
+        <td class="tg-l5wk" colspan="2">모델명</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[0][6]" name="table[0][6]" type="text" size=100 placeholder='modelname' value=<%= topic[0].modelname %>></td>
+      </tr>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value=<%= topic[0].line %> readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <% for(i=0;i<5;i++){ %>
+        <th class="tg-8u09"><%= time[i] %> TIME</th>
+        <% } %>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[0][0][0]" name="table[0][0][0]" type="text" size=8 placeholder='amodel' value=<%= topic[0].amodel %>></td>
+        <td class="tg-mwl0"><input id="table[0][0][1]" name="table[0][0][1]" type="text" size=8 placeholder='bmodel' value=<%= topic[0].bmodel %>></td>
+        <td class="tg-mwl0"><input id="table[0][0][2]" name="table[0][0][2]" type="text" size=8 placeholder='cmodel' value=<%= topic[0].cmodel %>></td>
+        <td class="tg-mwl0"><input id="table[0][0][3]" name="table[0][0][3]" type="text" size=8 placeholder='dmodel' value=<%= topic[0].dmodel %>></td>
+        <td class="tg-mwl0"><input id="table[0][0][4]" name="table[0][0][4]" type="text" size=8 placeholder='emodel' value=<%= topic[0].emodel %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[0][1][0]" name="table[0][1][0]" type="text" size=8 placeholder='atarget' onkeyup='call()' onfocus="this.select()" value=<%= topic[0].atarget %>></td> 
+        <td class="tg-mwl0"><input id="table[0][1][1]" name="table[0][1][1]" type="text" size=8 placeholder='btarget' onkeyup='call()' onfocus="this.select()" value=<%= topic[0].btarget %>></td>
+        <td class="tg-mwl0"><input id="table[0][1][2]" name="table[0][1][2]" type="text" size=8 placeholder='ctarget' onkeyup='call()' onfocus="this.select()" value=<%= topic[0].ctarget %>></td>
+        <td class="tg-mwl0"><input id="table[0][1][3]" name="table[0][1][3]" type="text" size=8 placeholder='btarget' onkeyup='call()' onfocus="this.select()" value=<%= topic[0].dtarget %>></td>
+        <td class="tg-mwl0"><input id="table[0][1][4]" name="table[0][1][4]" type="text" size=8 placeholder='ctarget' onkeyup='call()' onfocus="this.select()" value=<%= topic[0].etarget %>></td>
+        <td class="tg-mwl0"><input id="table[0][3][0]" name="table[0][3][0]" type="text" size=8 placeholder='targettotal' readonly value=<%= topic[0].targettotal %>></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[0][4]" name="table[0][4]" type="textarea" size=8 placeholder='achivementrate' readonly value=<%= topic[0].achivementrate %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[0][2][0]" name="table[0][2][0]" type="text" size=8 placeholder='aproduction' onkeyup='call2()' onfocus="this.select()" value=<%= topic[0].aproduction %>></td>
+        <td class="tg-mwl0"><input id="table[0][2][1]" name="table[0][2][1]" type="text" size=8 placeholder='bproduction' onkeyup='call2()' onfocus="this.select()" value=<%= topic[0].bproduction %>></td>
+        <td class="tg-mwl0"><input id="table[0][2][2]" name="table[0][2][2]" type="text" size=8 placeholder='cproduction' onkeyup='call2()' onfocus="this.select()" value=<%= topic[0].cproduction %>></td>
+        <td class="tg-mwl0"><input id="table[0][2][3]" name="table[0][2][3]" type="text" size=8 placeholder='dproduction' onkeyup='call2()' onfocus="this.select()" value=<%= topic[0].dproduction %>></td>
+        <td class="tg-mwl0"><input id="table[0][2][4]" name="table[0][2][4]" type="text" size=8 placeholder='eproduction' onkeyup='call2()' onfocus="this.select()" value=<%= topic[0].eproduction %>></td>
+        <td class="tg-mwl0"><input id="table[0][3][1]" name="table[0][3][1]" type="text" size=8 placeholder='resulttotal' readonly value=<%= topic[0].resulttotal %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[0][5]" name="table[0][5]" type="textarea" size=100 placeholder='remarks' value=<%= topic[0].remarks %>></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+  <table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+    </colgroup>
+    <thead>
+      <tr>
+        <td class="tg-l5wk" colspan="2">모델명</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[1][6]" name="table[1][6]" type="text" size=100 placeholder='modelname' value=<%= topic[1].modelname %>></td>
+      </tr>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value=<%= topic[1].line %> readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <th class="tg-8u09">A TIME</th>
+        <th class="tg-8u09">B TIME</th>
+        <th class="tg-8u09">C TIME</th>
+        <th class="tg-8u09">D TIME</th>
+        <th class="tg-8u09">E TIME</th>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[1][0][0]" name="table[1][0][0]" type="text" size=8 placeholder='amodel' value=<%= topic[1].amodel %>></td>
+        <td class="tg-mwl0"><input id="table[1][0][1]" name="table[1][0][1]" type="text" size=8 placeholder='bmodel' value=<%= topic[1].bmodel %>></td>
+        <td class="tg-mwl0"><input id="table[1][0][2]" name="table[1][0][2]" type="text" size=8 placeholder='cmodel' value=<%= topic[1].cmodel %>></td>
+        <td class="tg-mwl0"><input id="table[1][0][3]" name="table[1][0][3]" type="text" size=8 placeholder='dmodel' value=<%= topic[1].dmodel %>></td>
+        <td class="tg-mwl0"><input id="table[1][0][4]" name="table[1][0][4]" type="text" size=8 placeholder='emodel' value=<%= topic[1].emodel %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[1][1][0]" name="table[1][1][0]" type="text" size=8 placeholder='atarget' onkeyup='call4()' onfocus="this.select()" value=<%= topic[1].atarget %>></td> 
+        <td class="tg-mwl0"><input id="table[1][1][1]" name="table[1][1][1]" type="text" size=8 placeholder='btarget' onkeyup='call4()' onfocus="this.select()" value=<%= topic[1].btarget %>></td>
+        <td class="tg-mwl0"><input id="table[1][1][2]" name="table[1][1][2]" type="text" size=8 placeholder='ctarget' onkeyup='call4()' onfocus="this.select()" value=<%= topic[1].ctarget %>></td>
+        <td class="tg-mwl0"><input id="table[1][1][3]" name="table[1][1][3]" type="text" size=8 placeholder='btarget' onkeyup='call4()' onfocus="this.select()" value=<%= topic[1].dtarget %>></td>
+        <td class="tg-mwl0"><input id="table[1][1][4]" name="table[1][1][4]" type="text" size=8 placeholder='ctarget' onkeyup='call4()' onfocus="this.select()" value=<%= topic[1].etarget %>></td>
+        <td class="tg-mwl0"><input id="table[1][3][0]" name="table[1][3][0]" type="text" size=8 placeholder='targettotal' readonly value=<%= topic[1].targettotal %>></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[1][4]" name="table[1][4]" type="textarea" size=8 placeholder='achivementrate' readonly value=<%= topic[1].achivementrate %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[1][2][0]" name="table[1][2][0]" type="text" size=8 placeholder='aproduction' onkeyup='call5()' onfocus="this.select()" value=<%= topic[1].aproduction %>></td>
+        <td class="tg-mwl0"><input id="table[1][2][1]" name="table[1][2][1]" type="text" size=8 placeholder='bproduction' onkeyup='call5()' onfocus="this.select()" value=<%= topic[1].bproduction %>></td>
+        <td class="tg-mwl0"><input id="table[1][2][2]" name="table[1][2][2]" type="text" size=8 placeholder='cproduction' onkeyup='call5()' onfocus="this.select()" value=<%= topic[1].cproduction %>></td>
+        <td class="tg-mwl0"><input id="table[1][2][3]" name="table[1][2][3]" type="text" size=8 placeholder='dproduction' onkeyup='call5()' onfocus="this.select()" value=<%= topic[1].dproduction %>></td>
+        <td class="tg-mwl0"><input id="table[1][2][4]" name="table[1][2][4]" type="text" size=8 placeholder='eproduction' onkeyup='call5()' onfocus="this.select()" value=<%= topic[1].eproduction %>></td>
+        <td class="tg-mwl0"><input id="table[1][3][1]" name="table[1][3][1]" type="text" size=8 placeholder='resulttotal' readonly value=<%= topic[1].resulttotal %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[1][5]" name="table[1][5]" type="textarea" size=100 placeholder='remarks' value=<%= topic[1].remarks %>></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+  <table class="tg" style="table-layout: fixed; width: 636px">
+    <colgroup>
+      <col style="width: 63px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+      <col style="width: 110px">
+    </colgroup>
+    <thead>
+      <tr>
+        <td class="tg-l5wk" colspan="2">모델명</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[2][6]" name="table[2][6]" type="text" size=100 placeholder='modelname' value=<%= topic[2].modelname %>></td>
+      </tr>
+      <tr>
+        <th class="tg-7v7y" rowspan="5"><input id="line" name="line" type="text" size=2 value=<%= topic[2].line %> readonly ></input></th> <!-- line -->
+        <th class="tg-l5wk"></th>
+        <th class="tg-8u09">A TIME</th>
+        <th class="tg-8u09">B TIME</th>
+        <th class="tg-8u09">C TIME</th>
+        <th class="tg-8u09">D TIME</th>
+        <th class="tg-8u09">E TIME</th>
+        <th class="tg-l5wk" rowspan="2">합계<br></th>
+        <th class="tg-l5wk" rowspan="2">달성률<br></th>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산모델</td>
+        <td class="tg-mwl0"><input id="table[2][0][0]" name="table[2][0][0]" type="text" size=8 placeholder='amodel' value=<%= topic[2].amodel %>></td>
+        <td class="tg-mwl0"><input id="table[2][0][1]" name="table[2][0][1]" type="text" size=8 placeholder='bmodel' value=<%= topic[2].bmodel %>></td>
+        <td class="tg-mwl0"><input id="table[2][0][2]" name="table[2][0][2]" type="text" size=8 placeholder='cmodel' value=<%= topic[2].cmodel %>></td>
+        <td class="tg-mwl0"><input id="table[2][0][3]" name="table[2][0][3]" type="text" size=8 placeholder='dmodel' value=<%= topic[2].dmodel %>></td>
+        <td class="tg-mwl0"><input id="table[2][0][4]" name="table[2][0][4]" type="text" size=8 placeholder='emodel' value=<%= topic[2].emodel %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">목표수량</td>
+        <td class="tg-mwl0"><input id="table[2][1][0]" name="table[2][1][0]" type="text" size=8 placeholder='atarget' onkeyup='call7()' onfocus="this.select()" value=<%= topic[2].atarget %>></td> 
+        <td class="tg-mwl0"><input id="table[2][1][1]" name="table[2][1][1]" type="text" size=8 placeholder='btarget' onkeyup='call7()' onfocus="this.select()" value=<%= topic[2].btarget %>></td>
+        <td class="tg-mwl0"><input id="table[2][1][2]" name="table[2][1][2]" type="text" size=8 placeholder='ctarget' onkeyup='call7()' onfocus="this.select()" value=<%= topic[2].ctarget %>></td>
+        <td class="tg-mwl0"><input id="table[2][1][3]" name="table[2][1][3]" type="text" size=8 placeholder='btarget' onkeyup='call7()' onfocus="this.select()" value=<%= topic[2].dtarget %>></td>
+        <td class="tg-mwl0"><input id="table[2][1][4]" name="table[2][1][4]" type="text" size=8 placeholder='ctarget' onkeyup='call7()' onfocus="this.select()" value=<%= topic[2].etarget %>></td>
+        <td class="tg-mwl0"><input id="table[2][3][0]" name="table[2][3][0]" type="text" size=8 placeholder='targettotal' readonly value=<%= topic[2].targettotal %>></td>
+        <td class="tg-mwl0" rowspan="2"><input id="table[2][4]" name="table[2][4]" type="textarea" size=8 placeholder='achivementrate' readonly value=<%= topic[2].achivementrate %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">생산수량</td>
+        <td class="tg-mwl0"><input id="table[2][2][0]" name="table[2][2][0]" type="text" size=8 placeholder='aproduction' onkeyup='call8()' onfocus="this.select()" value=<%= topic[2].aproduction %>></td>
+        <td class="tg-mwl0"><input id="table[2][2][1]" name="table[2][2][1]" type="text" size=8 placeholder='bproduction' onkeyup='call8()' onfocus="this.select()" value=<%= topic[2].bproduction %>></td>
+        <td class="tg-mwl0"><input id="table[2][2][2]" name="table[2][2][2]" type="text" size=8 placeholder='cproduction' onkeyup='call8()' onfocus="this.select()" value=<%= topic[2].cproduction %>></td>
+        <td class="tg-mwl0"><input id="table[2][2][3]" name="table[2][2][3]" type="text" size=8 placeholder='dproduction' onkeyup='call8()' onfocus="this.select()" value=<%= topic[2].dproduction %>></td>
+        <td class="tg-mwl0"><input id="table[2][2][4]" name="table[2][2][4]" type="text" size=8 placeholder='eproduction' onkeyup='call8()' onfocus="this.select()" value=<%= topic[2].eproduction %>></td>
+        <td class="tg-mwl0"><input id="table[2][3][1]" name="table[2][3][1]" type="text" size=8 placeholder='resulttotal' readonly value=<%= topic[2].resulttotal %>></td>
+      </tr>
+      <tr>
+        <td class="tg-l5wk">비고</td>
+        <td class="tg-mwl0" colspan="7"><input id="table[2][5]" name="table[2][5]" type="textarea" size=100 placeholder='remarks' value=<%= topic[2].remarks %>></td>
+      </tr>
+    </thead>
+  </table>
+  <input id="save" name="save" value="수정" type="submit">
+  <br><br>
+</form>
+</div>
+
+<script type="text/javascript">
+  function call() {// targettotal 목표수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[0][1][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[0][1][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[0][1][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[0][1][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[0][1][4]').value);
+    var total = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total += targettotal[i];
+    }
+    document.getElementById('table[0][3][0]').value = total;
+    call3();
+  }
+  function call2() { // resulttotal 생산수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[0][2][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[0][2][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[0][2][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[0][2][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[0][2][4]').value);
+    var total2 = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total2 += targettotal[i];
+    }
+    document.getElementById('table[0][3][1]').value = total2;
+    call3();
+  }
+  function call3() { // achivementrate
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[0][3][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[0][3][1]').value);
+    var total3 = (targettotal[1]/targettotal[0])*100;
+    document.getElementById('table[0][4]').value = total3.toFixed(2);
+  }
+  //B line
+  function call4() {// targettotal 목표수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[1][1][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[1][1][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[1][1][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[1][1][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[1][1][4]').value);
+    var total = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total += targettotal[i];
+    }
+    document.getElementById('table[1][3][0]').value = total;
+    call6();
+  }
+  function call5() { // resulttotal 생산수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[1][2][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[1][2][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[1][2][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[1][2][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[1][2][4]').value);
+    var total2 = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total2 += targettotal[i];
+    }
+    document.getElementById('table[1][3][1]').value = total2;
+    call6(); 
+  }
+  function call6() { // achivementrate
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[1][3][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[1][3][1]').value);
+    var total3 = (targettotal[1]/targettotal[0])*100;
+    document.getElementById('table[1][4]').value = total3.toFixed(2);
+  }
+  //C line
+  function call7() {// targettotal 목표수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[2][1][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[2][1][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[2][1][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[2][1][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[2][1][4]').value);
+    var total = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total += targettotal[i];
+    }
+    document.getElementById('table[2][3][0]').value = total;
+    call9();
+  }
+  function call8() { // resulttotal 생산수량 합계
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[2][2][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[2][2][1]').value);
+    targettotal[2] = parseInt(document.getElementById('table[2][2][2]').value);
+    targettotal[3] = parseInt(document.getElementById('table[2][2][3]').value);
+    targettotal[4] = parseInt(document.getElementById('table[2][2][4]').value);
+    var total2 = 0;
+    for(var i = 0; i < targettotal.length; i++) {
+      total2 += targettotal[i];
+    }
+    document.getElementById('table[2][3][1]').value = total2;
+    call9();
+  }
+  function call9() { // achivementrate
+    var targettotal = new Array(5);
+    targettotal[0] = parseInt(document.getElementById('table[2][3][0]').value);
+    targettotal[1] = parseInt(document.getElementById('table[2][3][1]').value);
+    var total3 = (targettotal[1]/targettotal[0])*100;
+    document.getElementById('table[2][4]').value = total3.toFixed(2);
+  }
+</script>
+</body>
+</html>
