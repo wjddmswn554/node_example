@@ -19,7 +19,9 @@ var app = express();
 var http = require('http').Server(app); //1
 var io = require('socket.io')(http);    //1  npm i socket --save 오류발생시-> npm link socket.io
 var topics = require('./routes/topics');
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json()); //lora ap JSON data 수신
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname+'/public'));
 

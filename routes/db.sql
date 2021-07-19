@@ -32,9 +32,10 @@ insert into smt (line, amodel, atarget, aproduction, bmodel, btarget, bproductio
 
 #user테이블 생성
 create table user
-( id int NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+( idx int NOT NULL PRIMARY KEY AUTO_INCREMENT, 
 username char(200) not NULL,
 name char(200) not NULL,
 email char(200) not NULL,
-password char(200) not NULL
-)
+password char(200) not null,
+salt varchar(200) not null
+);
