@@ -45,6 +45,18 @@ router.get('/users', function (req, res, next) { //http api test
   });
 });
 
+router.post('/lps8', function (req, res, next) {
+  var body = req.body; // nodered상의 msg.payload
+
+  console.log(body);
+  console.log(`=============================================`);
+  // console.log();
+  console.log(`=============================================`);
+
+  let users = {state:'success'}
+  return res.json(users);
+});
+
 router.post('/test', function (req, res, next) { //http api test post
   var body = req.body; //payload
   var byte_str = req.body.data.payload
@@ -70,12 +82,12 @@ router.post('/test', function (req, res, next) { //http api test post
 
 
   //change byte_to_hex
-  var result = "";
   const hexStr = bytesToHexString(byte_str);
   console.log('==============================================================');
   console.log('Receive data : ', body);
   console.log('==============================================================');
-  console.log('Receive eui : ', body.data.eui);
+  console.log('Receive eui : ', body.data.deveui);
+  console.log('Receive eui : ', body.data.gweui);
   console.log('Receive hex : ', hexStr);
 
   //스피커

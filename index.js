@@ -23,25 +23,44 @@ var bodyParser = require('body-parser');
 
 app.use(bodyParser.json()); //lora ap JSON data 수신
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname+'/public'));
+app.use(express.static(__dirname + '/public'));
 
 //모든 req는 client.html을 response하도록 설정
 app.use('/', require('./routes/home'));
 
-//socket.io
-io.on('connection', function(socket){ //사용자 접속하면 connection 이벤트자동발생
+// socket.io----------------------------------------------------
+io.on('connection', function (socket) { //사용자 접속하면 connection 이벤트자동발생
   console.log('client connected: ', socket.id);  //유저입장
-  socket.on('disconnect', function(){ //접속해제시 disconnect 이벤트자동발생
+  socket.on('disconnect', function () { //접속해제시 disconnect 이벤트자동발생
     console.log('client disconnected: ', socket.id);
   });
   //사용자정의 이벤트 - client로부터 메세지 받음
-  socket.on('send message', function(topic){ 
-    console.log("메세지도착 : ", topic.A, topic.B, topic.C); 
+  socket.on('send message', function (topic) {
+    console.log("메세지도착 : ", topic.A, topic.B, topic.C);
     topics.create_process2(topic);
     io.emit('receive message', topic); //모든 클라이언트들에게 이벤트 전달
-  });  
+  });
 });
 
-http.listen(3000, function(){ //app.listen이 아닌 http.listen
+//mqtt------------------------------------------------------------
+const mqtt = require('mqtt');
+//publish (client)
+const client = mqtt.connect('mqtt://test.mosquitto.org');
+
+// setInterval(
+//   () => {
+//     client.publish('dragino-205d50/CHANNEL/victrontech', 'Hello mqtt.'); 
+//   }, 
+//   2000
+// );
+
+//구독 (server)
+client.subscribe('dragino-205d50/CHANNEL/victrontech');
+
+client.on('message', function(topic, message){
+  console.log(`토픽 : ${topic.toString()}, 메세지 : ${message.toString()}`);
+})
+
+http.listen(3000, function () { //app.listen이 아닌 http.listen
   console.log('####### server on! #######');
 });
